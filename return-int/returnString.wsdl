@@ -22,7 +22,7 @@
   </operation>
 </portType>
 
-<binding name='ReturnStringBinding' type='tns:InventoryPortType'>
+<binding name='ReturnIntBinding' type='tns:ReturnIntPortType'>
   <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http'/>
   <operation name='getItemCount'>
     <soap:operation soapAction='urn:xmethods-delayed-quotes#getItemCount'/>
@@ -37,9 +37,9 @@
   </operation>
 </binding>
 
-<service name='ReturnStringService'>
-  <port name='ReturnStringPort' binding='ReturnStringBinding'>
-      <soap:address location='http://interoperabilidad.io/return-string/server.php' />
+<service name='ReturnIntService'>
+  <port name='ReturnIntPort' binding='ReturnIntBinding'>
+      <soap:address location='http://interoperabilidad.io/return-int/server.php' />
   </port>
 </service>
 

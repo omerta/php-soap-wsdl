@@ -2,7 +2,8 @@
 
 # Servidor SOAP con PHP5 - parte 1
 
-DISCLAIMER: lo que se muestra a continuación es un traducción libre de un articulo de *Jimmy Zimmerman*.
+DISCLAIMER: lo que se muestra a continuación es un traducción libre de un articulo de *Jimmy Zimmerman*, ver
+bibliografía.
 
 La creación de un servicio web SOAP usando php me parecía bastante intimidante, hasta que decidí agacharme
 y construir mi propio WSDL. Ahora que he ido y regresado con éxito por el proceso de construcción de un servicio web
@@ -10,7 +11,7 @@ SOAP con php5, deseo confesar que realmente no es tan malo. En realidad estoy mu
 fácil fue terminarlo.
 
 Para comenzar recomiendo leer [PHP Soap Extension article](http://devzone.zend.com/25/php-soap-extension)
-que se encuentra en la pagina web de Zend Developer Zone. Antes de comenzar es necesario asegurarse 
+que se encuentra en la pagina web del Zend Developer Zone. Antes de comenzar es necesario asegurarse 
 que estamos ejecutando php5 con la extensión de soap instalada.
 Si no estamos seguros de estar en la versión 5 y con la extensión SOAP instalada, podemos crear un script
 con el código que se muestra a continuación:
@@ -20,19 +21,19 @@ con el código que se muestra a continuación:
 ```
 
 Este *script* debería mostrar toda la información de la configuración del servidor que nosotros necesitamos. 
-Buscamos la página para "SOAP" y si la encontramos se encontraran también algunas variables de
+Buscamos la página para "SOAP" si la encontramos nos encontraremos también con algunas variables de
 configuración, con esto sabrás que esta todo bien y podremos continuar.
 
-Para configurar el servidor SOAP que se muestra en este tutorial necesitamos tres archivos: *stockwuote.wsdl*,
- *server1.php* y *client3.php*. Coloque estos archivos en un directorio que sea accesible por http y modifique
-el archivo stockquote.wsdl, reemplazando *http://[ruta real]/server1.php con la ruta real hacia nuestro
-archivo *server1.php*.
+Para configurar el servidor SOAP que se muestra en este tutorial necesitamos tres archivos: el archivo *.wsdl*
+(stockwuote.wsdl),  *server.php* y *client.php*. Coloque estos archivos en un directorio que sea accesible por http y modifique
+el archivo stockquote.wsdl, reemplazando *http://[ruta real]/server.php con la ruta real hacia nuestro
+archivo *server.php*.
 
-Los Test sobre el servidor se hacen usando el script client3.php. De esta manera podemos modificar el servidor
-para *return* otros tipos de datos *complex*, podremos desear cambiar la función *print* por *print_r* para
-mostrar todo el *data schema* que fue regresado.
+Las pruebas sobre el servidor se hacen usando el script client.php. De esta manera podemos modificar el servidor
+para que regrese otros tipos de datos, como datos *complex*, en este caso podremos desear cambiar la función
+*print* por *print_r* para mostrar todo el *data schema* que fue regresado.
 
-Una vez que tenemos esto trabajando, podemos comenzar a modificar la función o el WSDL para lo que necesitemos
+Una vez que tenemos esto trabajando, podemos comenzar a modificar la función y el WSDL para lo que necesitemos
 hacer.
 
 **Importante**: Antes de hacer los cambios al WSDL, agregamos la siguiente linea arriba del código del cliente
@@ -45,116 +46,119 @@ init_set("soap.wsdl_cache_enabled", "0"); // desactivar el cache WSDL
 Además, en el archivo wsdl hay una parte que tiene *urn:xmethods-delayed-quotes* que no tiene nada que ver con
 stockquotes y debemos dejarlo como esta.
 
+En este ejemplo mostraremos como regresar un dato *int*, que en la lógica del negocio podríamos imaginar que
+estamos consultando en nuestro inventario el numero de artículos/productos a partir de un identificador numérico único.
+
 # Servidor SOAP con PHP5 - parte 2: divirtiéndonos con el archivo wsdl
 
 La parte 1 de esta serie de posts debería ayudar a comenzar con la configuración de un
-servidor soap simple, con una función y una operación de petición. Debemos señalar el tutorial
-[soap extension tutorial][http://devzone.zend.com/node/view/id/689] en *Zend Developer Zone*.
+servidor soap simple, con una función y una operación de petición.
 
 A continuación explicaremos algunas de las diferentes partes del wsdl, el wsdl no es tan intimidante.
-Vamos a comenzar examinando el wsdl que se encuentra en
- [este][http://devzone.zend.com/node/view/id/689#Heading7] tutorial.
+Vamos a comenzar examinando una simplificación del wsdl que se encuentra en
+ (este enlace)[http://www.webservicex.net/stockquote.asmx?WSDL].
 
-Comenzaremos por el final del archivo wsdl para terminar con el inicio.
+Comenzaremos por el final del archivo wsdl para terminar con el encabezado.
 
 ## El bloque 'service'
 
 ```xml
 <service name='StockQuoteService'>
-<port name='StockQuotePort' binding='StockQuoteBinding'>
-<soap:address location='http://[insertar la ruta correcta]/server1.php />
+ <port name='StockQuotePort' binding='StockQuoteBinding'>
+  <soap:address location='http://[insertar la ruta correcta]/server.php />
 </port>
 </service>
 ```
 
 El bloque de servicio de el wsdl muestra información básica de nuestro servidor soap. Debemos colocar el nombre 
-del servicio y asegurar que sea consistente en todo el wsdl. Este ejemplo usa 'StockQuote' para todos los nombres
-pero podemos usar otro como 'Weather' o 'Inventory'. Haciendo el nombre coherente, de manera que si se construye
-un servicio de 'Inventario', nuestro bloque de servicio del wsdl debería ser como:
+del servicio y asegurar que sea consistente en todo el wsdl. Este ejemplo usa *StockQuoteService* para el nombre
+del servicio pero podemos usar otro como 'Weather' o 'Inventory' cuidando que el nombre sea consitente, de manera que si se construye
+un servicio de 'Inventario' que regresa un valor *int*, nuestro bloque de servicio en el wsdl podría ser como:
 
 ```xml
-<service name='InventoryService'>
-<port name='InventoryPort' binding='InventoryBinding'>
-<soap:address location='http://[insertar la ruta correcta]/server1.php' />
-</port>
+<service name='ReturnIntService'>
+ <port name='ReturnIntPort' binding='ReturnIntBinding'>
+  <soap:address location='http://[insertar la ruta correcta]/return-int/server.php' />
+ </port>
 </service>
 ```
 
-El *port name* y el *binding* conecta este bloque con las otras partes del wsdl, así con solo mantener la convención
+El *port name* y el *binding* conecta este bloque con otras partes del wsdl, así que con solo mantener la convención
 de nombres todo estará bien.
 
 El *address location* apunta a la ubicación de lo que se llama *glue code* o el script de php que pega nuestra *función*
-con la extensión soap y las bibliotecas del servidor. el código glue es el que maneja todo nuestros *xml messages* y paso
+con la extensión soap y las bibliotecas del servidor. El *glue code* es el que maneja todo nuestros *xml messages* y pasa
 los parámetros correctos a nuestras funciones.
 
 ## El bloque 'binding'
 
 ```xml
 <binding name='StockQuoteBinding' type='tns:StockQuoetetype'>
-<soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http' />
-<operation name='getQuote'>
-<soap:operation soapAction='urn:xmethods-delayed-quotes#getQuote />
-<input>
-<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
-</input>
-<output>
-<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encondingStyle='http://schemas.xmlsoap.org/soap/endoding/' />
-</output>
-</operation>
+ <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http' />
+ <operation name='getQuote'>
+  <soap:operation soapAction='urn:xmethods-delayed-quotes#getQuote />
+  <input>
+   <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+  </input>
+  <output>
+   <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encondingStyle='http://schemas.xmlsoap.org/soap/endoding/' />
+  </output>
+ </operation>
 </binding>
 ```
 
 El bloque de binding tiene muchas cosas en él, muchas de estas cosas definen como el cliente y el servidor
 se comunican. Es muy poco el código que debemos modificar para adaptarlo a nuestros servicio.
 Hay cuatro partes que necesitaremos modificar para hacer corresponder las funciones que deseamos colocar
-en el servidor. Estas partes ... Es necesario cambiar el *name* y el *type* en la etiqueta binding,
- el *Name* en la etiqueta operation y la #functionName que se encuentra al final de la etiqueta soap:operation.
+en el servidor. Es necesario cambiar el *name* y el *type* en la etiqueta binding,
+ el *name* en la etiqueta operation y la *#functionName* (#getQuote -> #getItemCount) que se encuentra al final de la etiqueta soap:operation.
 
-Así, si nosotros estamos ajustando para adaptarlo al ejemplo del 'Inventory' nosotros cambiaremos por
-getQuote por getItemCount y la etiqueta binding como se muestra abajo:
+Así, si nosotros estamos ajustando para adaptarlo al ejemplo del 'ReturnIntService' nosotros cambiaremos 
+*getQuote* por *getItemCount* y la etiqueta binding como se muestra abajo:
 
 ```xml
-<binding name='InventoryBinding' type='tns:InventoryPortType'>
-<soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http' />
-<operation name='getItemCount'>
-<soap:operation soapAction='urn:xmethods-delayed-quotes#getItemCount />
-<input>
-<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
-</input>
-<output>
-<soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encondingStyle='http://schemas.xmlsoap.org/soap/endoding/' />
-</output>
-</operation>
+<binding name='ReturnIntBinding' type='tns:ReturnIntPortType'>
+ <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http' />
+ <operation name='getItemCount'>
+  <soap:operation soapAction='urn:xmethods-delayed-quotes#getItemCount />
+  <input>
+   <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+  </input>
+  <output>
+   <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encondingStyle='http://schemas.xmlsoap.org/soap/endoding/' />
+  </output>
+ </operation>
 </binding>
 ```
 
 Si necesitáramos agregar otra función a nuestro servidor, solo debemos copiar la sección 'operaction' de este
-bloque y pegarla una abajo de otra cambiando los cuatro valores descritos.
+bloque y pegarla una abajo de la otra cambiando los cuatro valores descritos.
 
 ## El bloque 'portType'
 
 ```xml
 <portType name='StockQuotePortType'>
-<operation name='getQuote'>
-<input message='tns:getQuoteRequest'/>
-<output message='tns:getQuoteResponse'/>
-</operation>
+ <operation name='getQuote'>
+  <input message='tns:getQuoteRequest'/>
+  <output message='tns:getQuoteResponse'/>
+ </operation>
 </portType>
 ```
 
 El bloque 'portType' connecta nuestro bloque binding con el bloque **message** que define las parámetros del método/función
-y los tipos de datos que se regresan. El *name* debe coincidir con el type del bloque binding. Necesitamos también cambiar el 
-*operation name* y los atributos del *input message* y *output message*, el atributo *message* de estas etiquetas puede ser llamado como se desee
-siempre que coincida con el name en el bloque *message*, bloque del que hablaremos a continuación.
+y los tipos de datos que se regresan. El *name* debe coincidir con el *type* del bloque binding. Necesitamos también cambiar el 
+*operation name*, para que coincida con el *operation name* del bloque binding, y los atributos del *input message* y *output message*,
+el atributo *message* de estas etiquetas puede ser llamado como se desee siempre que coincida con el name en el bloque *message*,
+bloque del que hablaremos a continuación.
 
-Para el ejemplo del 'Inventory' debemos cambiar nuestro bloque **portType** de la siguiente manera:
+Para el ejemplo del 'ReturnIntService' debemos cambiar nuestro bloque **portType** de la siguiente manera:
 
 ```xml
-<portType name='InventoryPortType'>
-<operation name='getItemQuote'>
-<input message='tns:getItemCountRequest'/>
-<output message='tns:getItemcountResponse'/>
-</operation>
+<portType name='ReturnIntPortType'>
+ <operation name='getItemCount'>
+  <input message='tns:getItemCountRequest'/>
+  <output message='tns:getItemcountResponse'/>
+ </operation>
 </portType>
 ```
 
@@ -168,6 +172,7 @@ Nuevamente, si tu deseas agregar otro método para nuestro servicio, podemos ten
  <part name='symbol' type='xsd:string' />
 </message>
 <message name='Result' type='xsd:float' />
+ <part name='Result' type='xsd:float' />
 </message>
 ```
 
@@ -194,7 +199,7 @@ Para el ejemplo del 'Inventario', podemos modificar la sección de esta manera:
 
 La *definitions header* es el que define los *namespaces* de nuestro documento wsdl. Usted puede en la mayoría de los
 casos dejarlo como esta en el ejemplo, pero es posible cambiar algunas partes. A continuación mostramos como se
-modifica el header para el ejemplo del 'Inventory':
+modifica el header para el ejemplo del 'ReturnIntService':
 
 ```xml
 <definitions name='Inventory'
