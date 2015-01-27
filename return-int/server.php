@@ -1,8 +1,8 @@
 <?php
-require 'return_string_function.php';
+require 'return_int_function.php';
 
 ini_set("soap.wsdl_cache_enabled", "0"); // disabling WSDL cache
-$server = new SoapServer("returnString.wsdl");
+$server = new SoapServer("returnInt.wsdl");
 $server->addFunction("getItemCount");
 $server->handle();
 ?>

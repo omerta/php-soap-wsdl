@@ -181,10 +181,11 @@ en el *portType block* del archivo wsdl. Aquí es donde reside el núcleo de nue
 
 Aquí se especifican los parámetros para los *request messages* y las estructura de la variable
 que es regresada por la *función*. Para los parámetros debemos asegurar que coincida el nombre
-de la función con el parámetro *name* de la etiqueta *message*, en el enlace siguiente se muestran los
+de la función en nuestro script del servidor (la función puede estar separa, llamada por un *require*)
+con el parámetro *name* de la etiqueta *message*, en el enlace siguiente se muestran los
 *primitive data types*: [built-in-primitive-datatypes][http://www.w3.org/TR/xmlschema-2/#built-in-primitive-datatypes]
 
-Para el ejemplo del 'Inventario', podemos modificar la sección de esta manera:
+Para el ejemplo del 'ReturnIntService', podemos modificar la sección de esta manera:
 
 ```xml
 <message name='getItemCountRequest'>
@@ -221,9 +222,11 @@ Esto es todo lo que debemos hacer. Crear nuestro propio wsdl no es tan malo como
 
 Si antes nos concentramos en la creación del wsdl, ahora nos moveremos hacia el llamado *glue code*
 y colocaremos todo junto. En la parte 2 nosotros creamos un *wsdl* que definió la *application programming
-interface (API)* para un web service que publicaba un inventario. Ahora definiremos una simple función
+interface (API)* para un web service que publicaba un inventario, regresa un entero. Ahora definiremos una simple función
 llamada getItemCount que toma un *upc (unique product code)* que tomara un *string* como parámetro de entrada
 y regresará un numero, la cantidad de artículos que se encuentran en el inventario, en forma de un entero.
+
+## El código de la función
 
 El código de la función es el siguiente:
 
@@ -237,9 +240,10 @@ El código de la función es el siguiente:
 ?>
 ```
 
-Es importante probar todas las funciones fuera del servicio web para minimizar todos los errores
+Es importante probar todas las funciones fuera del servicio web para minimizar todos los errores,
 de lo contrario se encontrara con un código de depuración algo desagradable. Es posible probar
-con mayor facilidad si separamos el código de las funciones o clases del *glue code*.
+con mayor facilidad si separamos el *código de las funciones o clases* del *glue code* (server.php
+separado del return_int_function.php).
 
 ## El *glue code*
 
@@ -249,18 +253,20 @@ El código es como el siguiente:
 
 ```php
 <?php
- require 'functions.php';
+ require 'return_int_function.php';
+
  init_set("soap.wsdl_cache_enable", "0"); // desactivar el cache WSDL
  $server = new SoapServer("returnInt.wsdl");
  $server->addFunction("getItemCount");
  $server->handle();
 ?>
 ```
-El script *functions.php* contiene nuestra función *getItemCount*. Aquí es importante que la función
-sea *inclided* o *required* antes de la declaración *$server->addFunction("functionName");* sea llamada.
+El script *return_int_function.php* contiene nuestra función *getItemCount*. Aquí es importante que la función
+sea *included* o *required* antes de la declaración *$server->addFunction("functionName");* sea llamada en el
+archivo *server.php*.
 
 Una vez que sabemos que nuestro *wsdl* es correcto, y no necesitamos cambiarlo más. Podremos remover
-la función *ini_set* del *glue code*.
+la función *ini_set* del *glue code* (server.php).
 
 ## Probar el servicio
 

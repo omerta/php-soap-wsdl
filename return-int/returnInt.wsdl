@@ -15,7 +15,7 @@
   <part name='Result' type='xsd:integer'/>
 </message>
 
-<portType name='InventoryPortType'>
+<portType name='ReturnIntPortType'>
   <operation name='getItemCount'>
     <input message='tns:getItemCountRequest'/>
     <output message='tns:getItemCountResponse'/>
