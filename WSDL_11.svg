@@ -14,7 +14,10 @@
    inkscape:version="0.48.5 r10040"
    width="632"
    height="560"
-   sodipodi:docname="WSDL_11.svg">
+   sodipodi:docname="WSDL_11.svg"
+   inkscape:export-filename="/srv/www/php-soap-wsdl/WSDL_11.png"
+   inkscape:export-xdpi="117"
+   inkscape:export-ydpi="117">
   <metadata
      id="metadata4159">
     <rdf:RDF>
@@ -42,13 +45,27 @@
      inkscape:window-height="958"
      id="namedview4155"
      showgrid="false"
-     inkscape:zoom="0.95964492"
-     inkscape:cx="227.6773"
-     inkscape:cy="277.90951"
+     inkscape:zoom="0.67857143"
+     inkscape:cx="363.77355"
+     inkscape:cy="403.86827"
      inkscape:window-x="1366"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g4189-9" />
+     inkscape:current-layer="svg4153" />
+  <rect
+     style="fill:#f4d7d7;fill-opacity:1;stroke:#ffffff;stroke-width:4.33797264;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     id="rect5309-8"
+     width="533.61731"
+     height="400.59854"
+     x="30.210529"
+     y="-153.01959" />
+  <rect
+     style="fill:#f4d7d7;fill-opacity:1;stroke:#ffffff;stroke-width:3.32471061;stroke-linejoin:round;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     id="rect5309"
+     width="539.27698"
+     height="232.8421"
+     x="25.052631"
+     y="284.42105" />
   <g
      id="g4189">
     <rect
@@ -90,7 +107,7 @@
          x="45.523392"
          sodipodi:role="line">  &lt;port name='...' binding='<tspan
    id="tspan4185"
-   style="fill:#280b0b">NameOfBinding</tspan>'&gt;</tspan><tspan
+   style="fill:#008000">NameOfBinding</tspan>'&gt;</tspan><tspan
          id="tspan4187"
          style="font-size:12px;fill:#ffffff"
          y="499.89951"
@@ -164,9 +181,9 @@
          x="45.523392"
          id="tspan4173-1"
          sodipodi:role="line">&lt;binding name='<tspan
-   style="fill:#000000"
+   style="fill:#008000"
    id="tspan4252">NameOfBinding</tspan>' type='<tspan
-   style="fill:#000000"
+   style="fill:#ffff00"
    id="tspan5121">NameOfPortType</tspan>'&gt;</tspan><tspan
          id="tspan4181-8"
          style="font-size:12px;fill:#ffffff"
@@ -237,7 +254,7 @@
          x="47.784103"
          id="tspan4173-1-1"
          sodipodi:role="line">&lt;portType name='<tspan
-   style="fill:#000000"
+   style="fill:#ffff00"
    id="tspan4252-8">NameOfPortType</tspan>'&gt;</tspan><tspan
          style="font-size:12px;fill:#ffffff"
          y="351.11804"
@@ -250,16 +267,187 @@
          y="366.11804"
          x="47.784103"
          sodipodi:role="line"
-         id="tspan5117">    &lt;input message='' /&gt;</tspan><tspan
+         id="tspan5117">    &lt;input message='tns:NameOfMessageRequest' /&gt;</tspan><tspan
          style="font-size:12px;fill:#ffffff"
          y="381.11804"
          x="47.784103"
          sodipodi:role="line"
-         id="tspan5119">    &lt;output message='' /&gt;</tspan><tspan
+         id="tspan5119">    &lt;output message='tns:NameOfMessageResponse' /&gt;</tspan><tspan
          id="tspan4187-9-5"
          style="font-size:12px;fill:#ffffff"
          y="396.11804"
          x="47.784103"
          sodipodi:role="line">....</tspan></text>
   </g>
+  <g
+     transform="translate(3.6471865,-405.35828)"
+     id="g4189-7">
+    <rect
+       y="527.69641"
+       x="70.859543"
+       height="1.0420521"
+       width="60.439022"
+       id="rect4163-5"
+       style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.80000001;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       y="378.68295"
+       x="36.471817"
+       height="147.72711"
+       width="434.53574"
+       id="rect4165-7"
+       style="fill:#ff5555;fill-opacity:1;stroke:#ffffff;stroke-width:0.86953038;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <rect
+       y="425.75934"
+       x="42.30521"
+       height="96.336311"
+       width="423.6842"
+       id="rect4179-4"
+       style="fill:#ff8080;fill-opacity:1;stroke:#ffffff;stroke-width:0.92877799;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    <text
+       sodipodi:linespacing="125%"
+       id="text4171-6"
+       y="441.7641"
+       x="46.565445"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         style="font-size:12px;fill:#ffffff"
+         y="441.7641"
+         x="46.565445"
+         id="tspan4173-0"
+         sodipodi:role="line">&lt;message name='NameOfMessageRequest'&gt;</tspan><tspan
+         id="tspan4181-89"
+         style="font-size:12px;fill:#ffffff"
+         y="456.7641"
+         x="46.565445"
+         sodipodi:role="line">  &lt;port name='symbol' type='xsd:...'&gt;</tspan><tspan
+         style="font-size:12px;fill:#ffffff"
+         y="471.7641"
+         x="46.565445"
+         sodipodi:role="line"
+         id="tspan5285">&lt;/message&gt;</tspan><tspan
+         style="font-size:12px;fill:#ffffff"
+         y="486.7641"
+         x="46.565445"
+         sodipodi:role="line"
+         id="tspan5287">&lt;message name='NameOfMessageResponse'&gt;</tspan><tspan
+         style="font-size:12px;fill:#ffffff"
+         y="501.7641"
+         x="46.565445"
+         sodipodi:role="line"
+         id="tspan5289">  &lt;port name='symbol' type='xsd:...'&gt;</tspan><tspan
+         style="font-size:12px;fill:#ffffff"
+         y="516.7641"
+         x="46.565445"
+         sodipodi:role="line"
+         id="tspan5291">&lt;/message&gt;</tspan><tspan
+         id="tspan4187-0"
+         style="font-size:12px;fill:#ffffff"
+         y="531.7641"
+         x="46.565445"
+         sodipodi:role="line" /></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text4167-9"
+       y="413.07068"
+       x="45.850296"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+       xml:space="preserve"><tspan
+         style="fill:#ffffff"
+         y="413.07068"
+         x="45.850296"
+         id="tspan4169-5"
+         sodipodi:role="line">message</tspan></text>
+    <g
+       transform="translate(2.770761,-161.45582)"
+       id="g4189-1">
+      <rect
+         y="454.75275"
+         x="47.934395"
+         height="1.0420521"
+         width="60.439022"
+         id="rect4163-58"
+         style="fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:0.80000001;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <rect
+         y="406.81836"
+         x="35.429764"
+         height="125.04625"
+         width="434.53574"
+         id="rect4165-4"
+         style="fill:#ff5555;fill-opacity:1;stroke:#ffffff;stroke-width:0.80000001;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <rect
+         y="453.89474"
+         x="41.263157"
+         height="71.473686"
+         width="423.6842"
+         id="rect4179-7"
+         style="fill:#ff8080;fill-opacity:1;stroke:#ffffff;stroke-width:0.80000001;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <text
+         sodipodi:linespacing="125%"
+         id="text4171-3"
+         y="475.10977"
+         x="45.523392"
+         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           id="tspan4181-7"
+           style="font-size:12px;fill:#ffffff"
+           y="475.10977"
+           x="45.523392"
+           sodipodi:role="line">&lt;types&gt;</tspan><tspan
+           id="tspan4187-3"
+           style="font-size:12px;fill:#ffffff"
+           y="490.10977"
+           x="45.523392"
+           sodipodi:role="line">&lt;/types&gt;..</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text4167-3"
+         y="441.20609"
+         x="44.808243"
+         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+         xml:space="preserve"><tspan
+           style="fill:#ffffff"
+           y="441.20609"
+           x="44.808243"
+           id="tspan4169-2"
+           sodipodi:role="line">types</tspan></text>
+    </g>
+  </g>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:3.20000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     d="M 281.35407,216.12281 C 305.84488,134.79107 280.43273,77.605928 218.83094,37.931899"
+     id="path5299"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="cc" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:3.20000005;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+     d="m 315.74178,85.866295 c 65.45727,47.934395 63.15723,95.868795 48.97645,143.803195"
+     id="path5301"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="cc" />
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+     x="-163.91937"
+     y="526.07898"
+     id="text5329"
+     sodipodi:linespacing="125%"
+     transform="matrix(0.00647534,-0.99997903,0.99997903,0.00647534,0,0)"><tspan
+       sodipodi:role="line"
+       id="tspan5331"
+       x="-163.91937"
+       y="526.07898"
+       style="font-size:28px">Abstract Section</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans"
+     x="-517.03009"
+     y="520.34796"
+     id="text5333"
+     sodipodi:linespacing="125%"
+     transform="matrix(-0.00689878,-0.9999762,0.9999762,-0.00689878,0,0)"><tspan
+       sodipodi:role="line"
+       id="tspan5335"
+       x="-517.03009"
+       y="520.34796"
+       style="font-size:26px">Concrete Section</tspan></text>
 </svg>

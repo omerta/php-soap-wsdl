@@ -199,7 +199,7 @@ Para el ejemplo del 'ReturnIntService', podemos modificar la sección de esta ma
 ```
 # Opcional: El type block (ComplexType)
 
-´´´xml
+```xml
 <types>
  <xsd:schema targetNamespace="http://interoperabilidad.io/return-array/server.php">
   <xsd:complexType name="ownType">
@@ -217,7 +217,7 @@ Para el ejemplo del 'ReturnIntService', podemos modificar la sección de esta ma
   </xsd:complexType>
  </xsd:schema>
 </types>
-´´´
+```
 
 El *name* de la etiqueta ´complexContent´ debe conincidir con el *type* de la eqiqueta ´part´ en el **block message**.
 
@@ -243,7 +243,7 @@ modifica el header para el ejemplo del 'ReturnIntService':
 ```
 Esto es todo lo que debemos hacer. Crear nuestro propio wsdl no es tan malo como parece.
 
-![Relación entre los bloques del wsdl (cc-by-sa)](https://github.com/omerta/php-soap-wsdl/blob/master/WSDL_11.svg "Relación entre los bloques del wsdl")
+![Relación entre los bloques del wsdl (cc-by-sa)](https://github.com/omerta/php-soap-wsdl/blob/master/WSDL_11.png "Relación entre los bloques del wsdl")
 
 # Servidor SOAP con PHP5  - parte 3: el *glue code*
 
