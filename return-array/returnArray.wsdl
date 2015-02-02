@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<definitions name='Array'
+  targetNamespace='urn:JimmyzInventory'
+  xmlns:tns='urn:JimmyzInventory'
+  xmlns:soap='http://schemas.xmlsoap.org/wsdl/soap/'
+  xmlns:xsd='http://www.w3.org/2001/XMLSchema'
+  xmlns:soapenc='http://schemas.xmlsoap.org/soap/encoding/'
+  xmlns:wsdl='http://schemas.xmlsoap.org/wsdl/'
+  xmlns='http://schemas.xmlsoap.org/wsdl/'>
+
+<types>
+ <xsd:schema targetNamespace="http://interoperabilidad.io/return-array/server.php">
+  <xsd:complexType name="ownType">
+   <xsd:all>
+    <xsd:element name="id" type="xsd:int" nillable="true"/>
+    <xsd:element name="count" type="xsd:int" nillable="true"/>
+   </xsd:all>
+  </xsd:complexType>	
+  <xsd:complexType name="ArrayOwnType">
+   <xsd:complexContent>
+    <xsd:restriction base="soap-enc:Array">
+     <xsd:attribute ref="soap-enc:arrayType" wsdl:arrayType="tns:ownType[]"/>
+    </xsd:restriction>
+   </xsd:complexContent>
+  </xsd:complexType>
+ </xsd:schema>
+</types>
+
+<message name='getArrayRequest' />
+<message name='getArrayResponse'>
+ <part name='Result' type='xsd:ArrayOwnType' />
+</message>
+
+<portType name='ReturnArrayPortType'>
+ <operation name='getArray'>
+  <input message='tns:getArrayRequest' />
+  <output message='tns:getArrayResponse' />
+ </operation>
+</portType>
+
+<binding name='ReturnArrayBinding' type='ReturnArrayPortType'>
+ <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http' />
+ <operation name='getArray'>
+  <soap:operation soapAction='urn:xmethods-delayed-quotes#getArray' />
+  <input>
+   <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+  </input>
+  <output>
+   <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
+  </output>
+ </operation>
+</binding>
+
+<service name='ReturnArray'>
+ <port name='ReturnArrayPort' binding='ReturnArrayBinding'>
+  <soap:address location='http://interoperabilidad.io/return-array/server.php' />
+ </port>
+</service>
+
+</definitions>

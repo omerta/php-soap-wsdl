@@ -96,7 +96,7 @@ los parámetros correctos a nuestras funciones.
 <binding name='StockQuoteBinding' type='tns:StockQuoetetype'>
  <soap:binding style='rpc' transport='http://schemas.xmlsoap.org/soap/http' />
  <operation name='getQuote'>
-  <soap:operation soapAction='urn:xmethods-delayed-quotes#getQuote />
+  <soap:operation soapAction='urn:xmethods-delayed-quotes#getQuote' />
   <input>
    <soap:body use='encoded' namespace='urn:xmethods-delayed-quotes' encodingStyle='http://schemas.xmlsoap.org/soap/encoding/' />
   </input>
@@ -109,9 +109,8 @@ los parámetros correctos a nuestras funciones.
 
 El bloque de binding tiene muchas cosas en él, muchas de estas cosas definen como el cliente y el servidor
 se comunican. Es muy poco el código que debemos modificar para adaptarlo a nuestros servicio.
-Hay cuatro partes que necesitaremos modificar para hacer corresponder las funciones que deseamos colocar
-en el servidor. Es necesario cambiar el *name* y el *type* en la etiqueta binding,
- el *name* en la etiqueta operation y la *#functionName* (#getQuote -> #getItemCount) que se encuentra al final de la etiqueta soap:operation.
+Hay cuatro partes que necesitaremos modificar para hacer corresponder las funciones que deseamos publicar
+en el servidor. Es necesario cambiar el *name* y el *type* en la etiqueta binding, el name de la etiqueta *binding* debe corresponder con el binding de la *port* en el bloque service. El *name* en la etiqueta *operation* y la *#functionName* (#getQuote -> #getItemCount) que se encuentra al final de la etiqueta soap:operation, coincidiendo con el nombre de la *función* en nuestro script de php.
 
 Así, si nosotros estamos ajustando para adaptarlo al ejemplo del 'ReturnIntService' nosotros cambiaremos 
 *getQuote* por *getItemCount* y la etiqueta binding como se muestra abajo:
@@ -145,9 +144,13 @@ bloque y pegarla una abajo de la otra cambiando los cuatro valores descritos.
 </portType>
 ```
 
-El bloque 'portType' connecta nuestro bloque binding con el bloque **message** que define las parámetros del método/función
-y los tipos de datos que se regresan. El *name* debe coincidir con el *type* del bloque binding. Necesitamos también cambiar el 
-*operation name*, para que coincida con el *operation name* del bloque binding, y los atributos del *input message* y *output message*,
+El bloque 'portType' connecta nuestro bloque **binding** con el bloque **message** que define las parámetros del método/función
+y los tipos de datos que se regresan, es decir, los input y los output.
+
+El *name* debe coincidir con el *type* dle bloque **binding**. Necesitamos también cambiar el 
+*name* en la etiqueta *operation*, para que coincida con el *name* de la etiqueta operation del bloque *binding*.
+
+Los atributos del *input message* y *output message*,
 el atributo *message* de estas etiquetas puede ser llamado como se desee siempre que coincida con el name en el bloque *message*,
 bloque del que hablaremos a continuación.
 
@@ -162,27 +165,26 @@ Para el ejemplo del 'ReturnIntService' debemos cambiar nuestro bloque **portType
 </portType>
 ```
 
-Nuevamente, si tu deseas agregar otro método para nuestro servicio, podemos tener dos *operation block* dentro del
-*portType block*.
+Nuevamente, si tu deseas agregar otro método a nuestro servicio, podemos tener dos *operation block* dentro del *portType block*.
 
-#El bloque 'message'#
+# El bloque 'message'
 
 ```xml
 <message name='getQuoteRequest'>
  <part name='symbol' type='xsd:string' />
 </message>
-<message name='Result' type='xsd:float' />
+<message name='getQuoteResponse'>
  <part name='Result' type='xsd:float' />
 </message>
 ```
 
-Aquí hay dos *message blocks* que corresponden al atributo del *message* que se encuentran
+Aquí hay dos **message blocks** que corresponden al atributo del *message* que se encuentran
 en el *portType block* del archivo wsdl. Aquí es donde reside el núcleo de nuestro wsdl.
 
-Aquí se especifican los parámetros para los *request messages* y las estructura de la variable
-que es regresada por la *función*. Para los parámetros debemos asegurar que coincida el nombre
-de la función en nuestro script del servidor (la función puede estar separa, llamada por un *require*)
-con el parámetro *name* de la etiqueta *message*, en el enlace siguiente se muestran los
+El ´name´ del **message block** debe conincidir con el ´message´ de la etiqueta *input*/*output* en el **portType block**.
+
+Aquí se especifican los parámetros para los *request messages* y las estructuras de las variables (tipos de datos)
+que es regresada por la *función* de nuestro script php. Debemos asegurar que el ´name´ corresponda con el parametro *name* y se especifique el tipo de dato, en el enlace siguiente se muestran los
 *primitive data types*: [built-in-primitive-datatypes][http://www.w3.org/TR/xmlschema-2/#built-in-primitive-datatypes]
 
 Para el ejemplo del 'ReturnIntService', podemos modificar la sección de esta manera:
@@ -195,8 +197,31 @@ Para el ejemplo del 'ReturnIntService', podemos modificar la sección de esta ma
  <part name='Result' type='zsd:integer'/>
 </message>
 ```
+# Opcional: El type block (ComplexType)
 
-#El header 'definitions'#
+´´´xml
+<types>
+ <xsd:schema targetNamespace="http://interoperabilidad.io/return-array/server.php">
+  <xsd:complexType name="ownType">
+   <xsd:all>
+    <xsd:element name="id" type="xsd:int" nillable="true"/>
+    <xsd:element name="count" type="xsd:int" nillable="true"/>
+   </xsd:all>
+  <xsd:complexType>	
+  <xsd:complexType name="ArrayOwnType">
+   <xsd:complexContent>
+    <xsd:restriction base="soap-enc:Array">
+     <xsd:attribute ref="soap-enc:arrayType" wsdl:arrayType="tns:ownType[]"/>
+    </xsd:restriction>
+   </xsd:complexContent>
+  </xsd:complexType>
+ </xsd:schema>
+</types>
+´´´
+
+El *name* de la etiqueta ´complexContent´ debe conincidir con el *type* de la eqiqueta ´part´ en el **block message**.
+
+#El header 'definitions'
 
 La *definitions header* es el que define los *namespaces* de nuestro documento wsdl. Usted puede en la mayoría de los
 casos dejarlo como esta en el ejemplo, pero es posible cambiar algunas partes. A continuación mostramos como se
@@ -217,6 +242,8 @@ modifica el header para el ejemplo del 'ReturnIntService':
 </defnitions>
 ```
 Esto es todo lo que debemos hacer. Crear nuestro propio wsdl no es tan malo como parece.
+
+![Relación entre los bloques del wsdl (cc-by-sa)](https://github.com/omerta/php-soap-wsdl/blob/master/WSDL_11.svg "Relación entre los bloques del wsdl")
 
 # Servidor SOAP con PHP5  - parte 3: el *glue code*
 
