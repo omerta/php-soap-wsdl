@@ -311,6 +311,11 @@ código como el siguiente:
 En necesario sustituir *[ruta al servicio]* por nuestro url y ejecutar el script. Con suerte deberá ver los
 resultados que esperaba.
 
+### Requisitos de software
+
+* PHP 5.6.4-4
+* PHP 5.2.6-1+lenny16
+
 ### Bibliografía
 
 * [SOAP Server with PHP5 – part 1](jimmyzimmerman.com/blog/2007/02/soap-server-with-php5-part3-the-glue-code.html)
